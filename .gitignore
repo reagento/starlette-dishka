@@ -1,0 +1,10 @@
+.idea/
+.vscode/
+.venv/
+.ruff_cache/
+.coverage
+.nox/
+*.egg-info
+__pycache__/
+build/
+venv/
