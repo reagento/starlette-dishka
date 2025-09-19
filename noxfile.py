@@ -3,7 +3,7 @@ import nox
 nox.options.default_venv_backend = "uv"
 nox.options.reuse_existing_virtualenvs = True
 
-INSTALL_CMD = (".", "--group", "tests")
+INSTALL_CMD = ("-e", ".", "--group", "tests")
 
 
 @nox.session(tags=["ci"])
