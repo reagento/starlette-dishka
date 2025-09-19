@@ -1,5 +1,12 @@
 # Starlette integration for Dishka
 
+[![PyPI version](https://badge.fury.io/py/starlette-dishka.svg)](https://pypi.python.org/pypi/starlette-dishka)
+[![Supported versions](https://img.shields.io/pypi/pyversions/starlette-dishka.svg)](https://pypi.python.org/pypi/starlette-dishka)
+[![Downloads](https://img.shields.io/pypi/dm/starlette-dishka.svg)](https://pypistats.org/packages/starlette-dishka)
+[![License](https://img.shields.io/github/license/reagento/starlette-dishka)](https://github.com/reagento/starlette-dishka/blob/main/LICENSE)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/reagento/starlette-dishka/setup.yml)](https://github.com/reagento/starlette-dishka/actions)
+[![Telegram](https://img.shields.io/badge/💬-Telegram-blue)](https://t.me/reagento_ru)
+
 This package provides integration of [Dishka](http://github.com/reagento/dishka/) dependency injection framework and [Starlette](https://github.com/encode/starlette), a lightweight ASGI framework.
 
 ## Installation
