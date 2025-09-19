@@ -52,4 +52,4 @@ tests = [
 Source = "https://github.com/reagento/starlette-dishka"
 Homepage = "https://github.com/reagento/starlette-dishka"
 Download = "https://github.com/reagento/starlette-dishka/#files"
-"Bug Tracker" = "https://github.com/reagento/dishka/starlette-dishka"
+"Bug Tracker" = "https://github.com/reagento/starlette-dishka"
