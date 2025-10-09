@@ -34,10 +34,10 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "uv == 0.8.*",
-    "ruff == 0.13.*",
+    "uv == 0.9.*",
+    "ruff == 0.14.*",
     "mypy == 1.18.*",
-    "zizmor==1.13.0",
+    "zizmor == 1.14.*",
     "nox == 2025.05.01",
 ]
 tests = [
