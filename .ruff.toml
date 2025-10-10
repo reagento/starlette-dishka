@@ -6,6 +6,7 @@ include = [
     "src/**.py",
     "tests/**.py",
     "examples/**.py",
+    "noxfile.py",
 ]
 
 [lint]
