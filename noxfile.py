@@ -24,5 +24,3 @@ def starlette_latest(session: nox.Session) -> None:
         silent=False,
     )
     session.run("pytest", "tests/")
-
-
