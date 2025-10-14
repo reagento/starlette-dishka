@@ -1,0 +1,10 @@
+target-version = "py310"
+
+line-length = 79
+
+extend = "../.ruff.toml"
+
+[lint]
+preview = false
+select = ["ALL"]
+ignore = ["D", "ARG"]
