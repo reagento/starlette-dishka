@@ -59,17 +59,17 @@ Currently we use [`nox`](https://github.com/wntrblm/nox) for tests. To run it do
 nox
 ```
 
+If you want to run tests for a particular version you can do so:
+
+```bash
+nox -t ci     # run test with `starlette==0.27.0`
+nox -t latest # run test with latest `starlette`
+```
+
 ## Running security audit for GitHub Actions
 
 Currently we use ``zizmor`` to audit our GitHub Actions workflows for security issues. To run it do:
 
 ```bash
 zizmor .github/workflows
-```
-
-If you want to run tests for a particular version you can do so:
-
-```bash
-nox -t ci     # run test with `starlette==0.27.0`
-nox -t latest # run test with latest `starlette`
 ```
