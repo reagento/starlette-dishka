@@ -27,7 +27,6 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
     "Typing :: Typed",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
     "Development Status :: 5 - Production/Stable",
 ]
