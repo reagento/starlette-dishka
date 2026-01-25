@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   testing:
-    name: Testing (${{ matrix.python-version }})
+    name: "Testing (${{ matrix.python-version }})"
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -25,46 +25,84 @@ jobs:
           - "3.14"
 
     steps:
-    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      with:
-        persist-credentials: false
-    - name: Set up ${{ matrix.python-version }} on ${{ matrix.os }}
-      uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
-      with:
-        python-version: ${{ matrix.python-version }}
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+      - name: "Set up ${{ matrix.python-version }} on ${{ matrix.os }}"
+        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Install uv
-      uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
 
-    - name: Install dependencies
-      run: |
-        uv pip install . --group dev --system
+      - name: "Install dependencies"
+        run: |
+          uv pip install . --group ci --system
 
-    - name: Run ruff
-      run: |
-        ruff check
+      - name: "Run ruff"
+        run: |
+          ruff check
 
-    - name: Run mypy
-      run: |
-        mypy
+      - name: "Run mypy"
+        run: |
+          mypy
 
-    - name: Run zizmor
-      run: |
-        zizmor .github
+      - name: "Run tests"
+        run: |
+          nox -t ci
+          mv .coverage .coverage.${{ matrix.python-version }}
 
-    - name: Run tests
-      run: |
-        nox -t ci
-        mv .coverage .coverage.${{ matrix.python-version }}
+      - name: Store coverage file
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          name: coverage-${{ matrix.python-version }}
+          path: .coverage.${{ matrix.python-version }}
+          if-no-files-found: error
+          include-hidden-files: true
 
-    - name: Store coverage file
-      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
-      if: ${{ github.event_name == 'pull_request' }}
-      with:
-        name: coverage-${{ matrix.python-version }}
-        path: .coverage.${{ matrix.python-version }}
-        if-no-files-found: error
-        include-hidden-files: true
+  zizmor:
+    name: "zizmor"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: "3.13"
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
+        with:
+          enable-cache: ${{ !startsWith(github.ref, 'refs/tags/') }} # zizmor: ignore[cache-poisoning]
+      - name: "Install zizmor"
+        run: |
+          uv pip install --group zizmor --system
+      - name: "Run zizmor"
+        run: |
+          zizmor .github/
+
+  typos:
+    name: "typos"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: "3.13"
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
+        with:
+          enable-cache: ${{ !startsWith(github.ref, 'refs/tags/') }} # zizmor: ignore[cache-poisoning]
+      - name: "Install typos"
+        run: |
+          uv pip install --group typos --system
+      - name: "Run typos"
+        run: |
+          typos
 
   coverage:
     name: Coverage
