@@ -5,4 +5,4 @@ exclude_lines =
 [run]
 relative_files = true
 omit =
-    src/dishka/_version.py
+    src/starlette_dishka/_version.py
