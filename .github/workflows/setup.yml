@@ -120,7 +120,7 @@ jobs:
           enable-cache: ${{ !startsWith(github.ref, 'refs/tags/') }} # zizmor: ignore[cache-poisoning]
       - name: "Install ast-grep"
         run: |
-          uv pip install --group typos --system
+          uv pip install --group ast-grep --system
       - name: "Run ast-grep"
         run: sg scan
 
