@@ -1,3 +1,4 @@
+from collections.abc import Awaitable, Callable
 from contextlib import asynccontextmanager
 from unittest.mock import Mock
 
@@ -25,7 +26,10 @@ from .common import (
 
 
 @asynccontextmanager
-async def dishka_app(view, provider) -> TestClient:
+async def dishka_app(
+    view: Callable[..., Awaitable[PlainTextResponse]],
+    provider: AppProvider,
+) -> TestClient:
     app = Starlette(routes=[Route("/", inject(view), methods=["GET"])])
     container = make_async_container(provider)
     setup_dishka(container, app)
@@ -44,7 +48,7 @@ async def get_with_app(
 
 
 @pytest.mark.asyncio
-async def test_app_dependency(app_provider: AppProvider):
+async def test_app_dependency(app_provider: AppProvider) -> None:
     async with dishka_app(get_with_app, app_provider) as client:
         client.get("/")
         app_provider.mock.assert_called_with(APP_DEP_VALUE)
@@ -62,7 +66,7 @@ async def get_with_request(
 
 
 @pytest.mark.asyncio
-async def test_request_dependency(app_provider: AppProvider):
+async def test_request_dependency(app_provider: AppProvider) -> None:
     async with dishka_app(get_with_request, app_provider) as client:
         client.get("/")
         app_provider.mock.assert_called_with(REQUEST_DEP_VALUE)
@@ -70,7 +74,7 @@ async def test_request_dependency(app_provider: AppProvider):
 
 
 @pytest.mark.asyncio
-async def test_request_dependency2(app_provider: AppProvider):
+async def test_request_dependency2(app_provider: AppProvider) -> None:
     async with dishka_app(get_with_request, app_provider) as client:
         client.get("/")
         app_provider.mock.assert_called_with(REQUEST_DEP_VALUE)

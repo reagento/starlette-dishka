@@ -1,4 +1,4 @@
-from collections.abc import AsyncGenerator
+from collections.abc import AsyncGenerator, Awaitable, Callable
 from contextlib import asynccontextmanager
 from unittest.mock import Mock
 
@@ -27,7 +27,10 @@ from .common import (
 
 
 @asynccontextmanager
-async def dishka_app(view, provider) -> AsyncGenerator[TestClient, None]:
+async def dishka_app(
+    view: Callable[..., Awaitable[None]],
+    provider: WebSocketAppProvider,
+) -> AsyncGenerator[TestClient, None]:
     app = Starlette(routes=[WebSocketRoute("/", inject(view))])
     container = make_async_container(provider)
     setup_dishka(container, app)
@@ -48,7 +51,7 @@ async def get_with_app(
 
 
 @pytest.mark.asyncio
-async def test_app_dependency(ws_app_provider: WebSocketAppProvider):
+async def test_app_dependency(ws_app_provider: WebSocketAppProvider) -> None:
     async with dishka_app(get_with_app, ws_app_provider) as client:
         with client.websocket_connect("/") as connection:
             connection.send_text("...")
@@ -71,7 +74,9 @@ async def get_with_request(
 
 
 @pytest.mark.asyncio
-async def test_request_dependency(ws_app_provider: WebSocketAppProvider):
+async def test_request_dependency(
+    ws_app_provider: WebSocketAppProvider,
+) -> None:
     async with dishka_app(get_with_request, ws_app_provider) as client:
         with client.websocket_connect("/") as connection:
             connection.send_text("...")
@@ -81,7 +86,9 @@ async def test_request_dependency(ws_app_provider: WebSocketAppProvider):
 
 
 @pytest.mark.asyncio
-async def test_request_dependency2(ws_app_provider: WebSocketAppProvider):
+async def test_request_dependency2(
+    ws_app_provider: WebSocketAppProvider,
+) -> None:
     async with dishka_app(get_with_request, ws_app_provider) as client:
         with client.websocket_connect("/") as connection:
             connection.send_text("...")
@@ -110,7 +117,9 @@ async def get_with_websocket(
 
 
 @pytest.mark.asyncio
-async def test_websocket_dependency(ws_app_provider: WebSocketAppProvider):
+async def test_websocket_dependency(
+    ws_app_provider: WebSocketAppProvider,
+) -> None:
     async with dishka_app(get_with_websocket, ws_app_provider) as client:
         with client.websocket_connect("/") as connection:
             connection.send_text("...")
