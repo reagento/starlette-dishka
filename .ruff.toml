@@ -14,25 +14,18 @@ preview = true
 select = ["ALL"]
 ignore = [
     "ARG",
-    "ANN",
     "D",
     "CPY001",
     "RUF029",
     "RET505",
     "ISC003",
     ########
-    "PLR0913",
     "PLR6201",
     "PLR6301",
     ########
     "EM101",
     "EM102",
     ########
-    "PT001",
-    "PT023",
-    ########
-    "SIM103",
-    "SIM108",
     "SIM114",
     ########
     "TC001",
@@ -47,6 +40,9 @@ ignore = [
     "S104",
 ]
 "tests/**" = [
+    "PT001",
+    "PT023",
+    ########
     "S101",
 ]
 
@@ -57,3 +53,6 @@ no-lines-before = ["local-folder"]
 
 [lint.flake8-tidy-imports]
 ban-relative-imports = "parents"
+
+[lint.pylint]
+max-args = 10

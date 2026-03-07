@@ -19,21 +19,20 @@ class ContainerMiddleware:
         receive: Receive,
         send: Send,
     ) -> None:
-        if scope["type"] not in ("http", "websocket"):
-            return await self.app(scope, receive, send)
-
+        scope_type = scope["type"]
         request: Request | WebSocket
         context: dict[type[Request | WebSocket], Request | WebSocket]
 
-        if scope["type"] == "http":
-            request = Request(scope, receive=receive, send=send)
+        if scope_type == "http":
+            request = Request(scope, receive, send)
             context = {Request: request}
             di_scope = Scope.REQUEST
-
-        else:
+        elif scope_type == "websocket":
             request = WebSocket(scope, receive, send)
             context = {WebSocket: request}
             di_scope = Scope.SESSION
+        else:
+            return await self.app(scope, receive, send)
 
         async with request.app.state.dishka_container(
             context,
@@ -53,21 +52,20 @@ class SyncContainerMiddleware:
         receive: Receive,
         send: Send,
     ) -> None:
-        if scope["type"] not in ("http", "websocket"):
-            return await self.app(scope, receive, send)
-
+        scope_type = scope["type"]
         request: Request | WebSocket
         context: dict[type[Request | WebSocket], Request | WebSocket]
 
-        if scope["type"] == "http":
-            request = Request(scope, receive=receive, send=send)
+        if scope_type == "http":
+            request = Request(scope, receive, send)
             context = {Request: request}
             di_scope = Scope.REQUEST
-
-        else:
+        elif scope_type == "websocket":
             request = WebSocket(scope, receive, send)
             context = {WebSocket: request}
             di_scope = Scope.SESSION
+        else:
+            return await self.app(scope, receive, send)
 
         with request.app.state.dishka_container(
             context,
