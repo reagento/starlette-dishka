@@ -1,6 +1,6 @@
 [build-system]
 requires = [
-    "setuptools == 82.0.0",
+    "setuptools == 82.0.1",
     "setuptools-scm[simple] == 9.2.2",
 ]
 build-backend = "setuptools.build_meta"
@@ -37,10 +37,10 @@ dependencies = [
 
 [dependency-groups]
 typos = ["typos == 1.44.0"]
-zizmor = ["zizmor == 1.22.0"]
-ast-grep = ["ast-grep-cli == 0.41.0"]
+zizmor = ["zizmor == 1.23.1"]
+ast-grep = ["ast-grep-cli == 0.41.1"]
 ci = [
-    "ruff == 0.15.5",
+    "ruff == 0.15.6",
     "mypy[mypyc, faster-cache] == 1.19.1",
     "nox == 2026.2.9",
 ]
@@ -52,7 +52,7 @@ tests = [
     "asgi-lifespan == 2.1.0",
 ]
 dev = [
-    "uv == 0.10.9",
+    "uv == 0.10.10",
     { include-group = "ci" },
     { include-group = "tests" },
     { include-group = "typos" },
