@@ -51,8 +51,15 @@ force-wrap-aliases = true
 combine-as-imports = true
 no-lines-before = ["local-folder"]
 
+# https://docs.astral.sh/ruff/settings/#lint_flake8-tidy-imports_ban-relative-imports
 [lint.flake8-tidy-imports]
 ban-relative-imports = "parents"
 
+# https://docs.astral.sh/ruff/settings/#lint_flake8-tidy-imports_banned-api
+[lint.flake8-tidy-imports.banned-api]
+"contextlib.suppress" = { msg = "Use `try-except-pass` instead" }
+
 [lint.pylint]
+# https://docs.astral.sh/ruff/rules/too-many-arguments/
+# https://docs.astral.sh/ruff/settings/#lint_pylint_max-args
 max-args = 10
