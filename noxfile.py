@@ -7,9 +7,9 @@ INSTALL_CMD = ("-e", ".", "--group", "tests")
 
 
 @nox.session(tags=["ci"])
-def starlette_0270(session: nox.Session) -> None:
+def starlette_0_27_0(session: nox.Session) -> None:
     session.install(
-        "starlette == 0.27.0",
+        "--group", "starlette_min",
         *INSTALL_CMD,
         silent=False,
     )
@@ -19,7 +19,7 @@ def starlette_0270(session: nox.Session) -> None:
 @nox.session(tags=["latest"])
 def starlette_latest(session: nox.Session) -> None:
     session.install(
-        "starlette",
+        "--group", "starlette_latest",
         *INSTALL_CMD,
         silent=False,
     )

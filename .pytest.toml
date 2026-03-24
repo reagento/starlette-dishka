@@ -1,6 +1,7 @@
 [pytest]
 # config in toml only since v9.0.0
 minversion = "9.0"
+testpaths = ["tests"]
 addopts = [
     "--cov=starlette_dishka",
     "--cov-config=.coveragerc",
