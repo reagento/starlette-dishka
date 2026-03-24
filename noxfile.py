@@ -13,7 +13,7 @@ def starlette_0_27_0(session: nox.Session) -> None:
         *INSTALL_CMD,
         silent=False,
     )
-    session.run("pytest", "tests/")
+    session.run("pytest")
 
 
 @nox.session(tags=["latest"])
@@ -23,4 +23,4 @@ def starlette_latest(session: nox.Session) -> None:
         *INSTALL_CMD,
         silent=False,
     )
-    session.run("pytest", "tests/")
+    session.run("pytest")
