@@ -1,18 +1,31 @@
+<div align="center">
+    
 # Starlette integration for Dishka
 
 <a href="https://pypi.org/project/starlette-dishka"><img alt="Python version" src="https://shieldcn.dev/pypi/starlette-dishka.svg?variant=branded&font=geist-mono&size=xs"></a>
 <a href="https://pypi.org/project/starlette-dishka"><img alt="Python version" src="https://shieldcn.dev/pypi/python/starlette-dishka.svg?variant=branded&font=geist-mono&size=xs"></a>
 <a href="https://pypi.org/project/starlette-dishka"><img alt="Monthly downloads" src="https://shieldcn.dev/pypi/dm/starlette-dishka.svg?variant=branded&font=geist-mono&size=xs"></a>
-<a href="https://github.com/reagento/starlette-dishka/blob/main/LICENSE"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/reagento/starlette-dishka/license.svg?variant=default&font=geist-mono&size=xs&mode=light"><img alt="License" src="https://shieldcn.dev/github/reagento/starlette-dishka/license.svg?variant=default&font=geist-mono&size=xs&mode=dark"></picture></a>
-<a href="https://github.com/reagento/starlette-dishka/actions?query=branch%3Amain"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/ci/reagento/starlette-dishka.svg?variant=default&font=geist-mono&size=xs&animate=pulse&mode=light"><img alt="CI" src="https://shieldcn.dev/github/ci/reagento/starlette-dishka.svg?variant=default&font=geist-mono&size=xs&animate=pulse&mode=dark"></picture></a>
-<a href="https://t.me/reagento_ru"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/dynamic/json.svg?url=https%3A%2F%2Ftg.chirizxc.workers.dev%2Freagento_ru&query=%24.members&suffix=+members&variant=default&size=xs&mode=light&logo=telegram&logoColor=24A1DE&label=Telegram"/><img alt="Telegram members" src="https://shieldcn.dev/badge/dynamic/json.svg?url=https%3A%2F%2Ftg.chirizxc.workers.dev%2Freagento_ru&query=%24.members&suffix=+members&variant=default&size=xs&mode=dark&logo=telegram&logoColor=24A1DE&label=Telegram"/></picture></a>
+
+<a href="https://github.com/reagento/starlette-dishka/actions?query=branch%3Amain"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/ci/reagento/starlette-dishka.svg?variant=outline&font=geist-mono&size=xs&animate=pulse&mode=dark"><img alt="CI" src="https://shieldcn.dev/github/ci/reagento/starlette-dishka.svg?variant=outline&font=geist-mono&size=xs&animate=pulse&mode=light"></picture></a>
+<a href="https://github.com/reagento/starlette-dishka/blob/main/LICENSE"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/reagento/starlette-dishka/license.svg?variant=outline&font=geist-mono&size=xs&mode=dark"><img alt="License" src="https://shieldcn.dev/github/reagento/starlette-dishka/license.svg?variant=outline&font=geist-mono&size=xs&mode=light"></picture></a>
+<a href="https://t.me/reagento_ru"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/dynamic/json.svg?url=https%3A%2F%2Ftg.chirizxc.workers.dev%2Freagento_ru&query=%24.members&suffix=+members&variant=outline&size=xs&mode=dark&logo=telegram&logoColor=24A1DE&label=Telegram"/><img alt="Telegram members" src="https://shieldcn.dev/badge/dynamic/json.svg?url=https%3A%2F%2Ftg.chirizxc.workers.dev%2Freagento_ru&query=%24.members&suffix=+members&variant=outline&size=xs&mode=light&logo=telegram&logoColor=24A1DE&label=Telegram"/></picture></a>
+
+</div>
 
 This package provides integration of [Dishka](http://github.com/reagento/dishka/) dependency injection framework and [Starlette](https://github.com/encode/starlette), a lightweight ASGI framework.
 
 ## Installation
 
-```sh
-pip install starlette-dishka
+Via [pip](https://github.com/pypa/pip):
+
+```bash
+pip install toml-rs
+```
+
+Via [uv](https://github.com/astral-sh/uv):
+
+```bash
+uv pip install toml-rs
 ```
 
 ## Features
