@@ -7,4 +7,4 @@ extend = "../.ruff.toml"
 [lint]
 preview = false
 select = ["ALL"]
-ignore = ["D", "ARG"]
+ignore = ["D", "ARG", "CPY001"]
