@@ -9,25 +9,68 @@ on:
 permissions:
   contents: read
 
+env:
+  FORCE_COLOR: "1"
+
 jobs:
-  testing:
-    name: "Testing (${{ matrix.python-version }})"
-    runs-on: ${{ matrix.os }}
+  tools:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        os:
-          - ubuntu-latest
-        python-version:
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          - "3.13"
-          - "3.14"
+        include:
+          - name: "zizmor"
+            commands: zizmor .github/
+
+          - name: "typos"
+            commands: typos --config .typos.toml
+
+          - name: "ast-grep"
+            commands: |
+              ast-grep test --test-dir tests/ast-grep
+              ast-grep scan
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"
+
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: ${{ github.ref_type != 'tag' }} # zizmor: ignore[cache-poisoning]
+
+      - name: "Install ${{ matrix.name }}"
+        run: uv pip install --group ${{ matrix.name }} --system
+
+      - name: "Run ${{ matrix.name }}"
+        run: ${{ matrix.commands }}
+
+  testing:
+    name: "Testing (${{ matrix.python-version }})"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [
+          "ubuntu-latest",
+        ]
+        python-version: [
+          "3.10",
+          "3.11",
+          "3.12",
+          "3.13",
+          "3.14",
+        ]
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
       - name: "Set up ${{ matrix.python-version }} on ${{ matrix.os }}"
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
@@ -49,8 +92,9 @@ jobs:
           mypy
 
       - name: "Run tests"
+        # See: https://docs.github.com/en/actions/reference/runners/github-hosted-runners#:~:text=ubuntu%2Dlatest
         run: |
-          nox -t ci
+          nox -t latest --parallel 4
           mv .coverage .coverage.${{ matrix.python-version }}
 
       - name: "Store coverage file"
@@ -61,68 +105,6 @@ jobs:
           path: .coverage.${{ matrix.python-version }}
           if-no-files-found: error
           include-hidden-files: true
-
-  zizmor:
-    name: "zizmor"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
-        with:
-          python-version: "3.14"
-      - name: "Install uv"
-        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
-        with:
-          enable-cache: ${{ !startsWith(github.ref, 'refs/tags/') }} # zizmor: ignore[cache-poisoning]
-      - name: "Install zizmor"
-        run: |
-          uv pip install --group zizmor --system
-      - name: "Run zizmor"
-        run: |
-          zizmor .github/
-
-  typos:
-    name: "typos"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
-        with:
-          python-version: "3.14"
-      - name: "Install uv"
-        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
-        with:
-          enable-cache: ${{ !startsWith(github.ref, 'refs/tags/') }} # zizmor: ignore[cache-poisoning]
-      - name: "Install typos"
-        run: |
-          uv pip install --group typos --system
-      - name: "Run typos"
-        run: |
-          typos
-
-  ast-grep:
-    name: "ast-grep"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
-        with:
-          python-version: "3.14"
-      - name: "Install uv"
-        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
-        with:
-          enable-cache: ${{ !startsWith(github.ref, 'refs/tags/') }} # zizmor: ignore[cache-poisoning]
-      - name: "Install ast-grep"
-        run: |
-          uv pip install --group ast-grep --system
-      - name: "Run ast-grep"
-        run: sg scan
 
   coverage:
     name: "Coverage"
@@ -147,7 +129,7 @@ jobs:
 
       - name: "Coverage comment"
         id: coverage_comment
-        uses: py-cov-action/python-coverage-comment-action@5d8df5979747514c914e1c5a12335a7cf9a2745f # v4.1
+        uses: py-cov-action/python-coverage-comment-action@a05be3d2e8a6272d3ef5fb2840ab20368bb2eb71 # v4.3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_COVERAGE_FILES: true

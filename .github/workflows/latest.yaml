@@ -1,8 +1,14 @@
-name: "Test starlette latest"
+# This workflow will install Python dependencies, run tests
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: "Test Latest"
 
 on:
   schedule:
     - cron: "0 0 * * *"
+
+env:
+  FORCE_COLOR: "1"
 
 jobs:
   cpython:
@@ -11,19 +17,22 @@ jobs:
       contents: read
     strategy:
       matrix:
-        os:
-          - ubuntu-latest
-        python-version:
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          - "3.13"
-          - "3.14"
+        os: [
+          "ubuntu-latest",
+        ]
+        python-version: [
+          "3.10",
+          "3.11",
+          "3.12",
+          "3.13",
+          "3.14",
+        ]
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+
       - name: "Set up ${{ matrix.python-version }} on ${{ matrix.os }}"
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
@@ -34,8 +43,9 @@ jobs:
 
       - name: "Install dependencies"
         run: |
-          uv pip install . --group dev --system
+          uv pip install . --group ci --system
 
       - name: "Run tests"
+        # See: https://docs.github.com/en/actions/reference/runners/github-hosted-runners#:~:text=ubuntu%2Dlatest
         run: |
-          nox -t latest
+          nox -t latest --parallel 4

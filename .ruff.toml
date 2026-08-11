@@ -2,10 +2,12 @@ target-version = "py310"
 
 line-length = 79
 
+output-prefer-rule-codes = true
+
 include = [
-    "src/**.py",
-    "tests/**.py",
-    "examples/**.py",
+    "src/**/*.py",
+    "tests/*.py",
+    "examples/*.py",
     "noxfile.py",
 ]
 
@@ -15,10 +17,10 @@ select = ["ALL"]
 ignore = [
     "ARG",
     "D",
-    "CPY001",
     "RUF029",
     "RET505",
     "ISC003",
+    "CPY001",  # Check copyright notices within Python files
     ########
     "PLR6201",
     "PLR6301",
@@ -28,10 +30,10 @@ ignore = [
     ########
     "SIM114",
     ########
-    "TC001",
-    "TC002",
-    "TC003",
-    "TC006",
+    "TC001",   # \
+    "TC002",   #  ==> `typing.TYPE_CHECKING` block's
+    "TC003",   # /
+    "TC006",   # Add quotes to type expression in `typing.cast()`
 ]
 
 [lint.per-file-ignores]
@@ -60,6 +62,6 @@ ban-relative-imports = "parents"
 "contextlib.suppress" = { msg = "Use `try-except-pass` instead" }
 
 [lint.pylint]
-# https://docs.astral.sh/ruff/rules/too-many-arguments/
+# https://docs.astral.sh/ruff/rules/too-many-arguments
 # https://docs.astral.sh/ruff/settings/#lint_pylint_max-args
 max-args = 10
