@@ -24,7 +24,7 @@ jobs:
             commands: zizmor .github/
 
           - name: "typos"
-            commands: typos --config .typos.toml
+            commands: typos
 
           - name: "ast-grep"
             commands: |
