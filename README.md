@@ -2,9 +2,9 @@
     
 # Starlette integration for Dishka
 
-<a href="https://pypi.org/project/starlette-dishka"><img alt="Python version" src="https://shieldcn.dev/pypi/starlette-dishka.svg?variant=branded&font=geist-mono&size=xs"></a>
-<a href="https://pypi.org/project/starlette-dishka"><img alt="Python version" src="https://shieldcn.dev/pypi/python/starlette-dishka.svg?variant=branded&font=geist-mono&size=xs"></a>
-<a href="https://pypi.org/project/starlette-dishka"><img alt="Monthly downloads" src="https://shieldcn.dev/pypi/dm/starlette-dishka.svg?variant=branded&font=geist-mono&size=xs"></a>
+![PyPI version](https://shieldcn.dev/badge/dynamic/json.svg?url=https%3A%2F%2Fpypi.org%2Fpypi%2Fstarlette-dishka%2Fjson&query=%24.info.version&variant=branded&size=xs&mode=light&logo=python&label=pypi+version)
+![PyPI requires python](https://shieldcn.dev/badge/dynamic/json.svg?url=https%3A%2F%2Fpypi.org%2Fpypi%2Fstarlette-dishka%2Fjson&query=%24.info.requires_python&size=xs&mode=light&logo=python&logoColor=ffffff&label=requires+python&color=3775A9)
+![PyPI downloads](https://shieldcn.dev/badge/dynamic/json.svg?url=https%3A%2F%2Fpypistats.org%2Fapi%2Fpackages%2Fstarlette-dishka%2Frecent&query=%24.data.last_month&suffix=%2Fmonth&size=xs&mode=light&logo=python&logoColor=ffffff&label=downloads&color=3775A9)
 
 <a href="https://github.com/reagento/starlette-dishka/actions?query=branch%3Amain"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/ci/reagento/starlette-dishka.svg?variant=outline&font=geist-mono&size=xs&animate=pulse&mode=dark"><img alt="CI" src="https://shieldcn.dev/github/ci/reagento/starlette-dishka.svg?variant=outline&font=geist-mono&size=xs&animate=pulse&mode=light"></picture></a>
 <a href="https://github.com/reagento/starlette-dishka/blob/main/LICENSE"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/reagento/starlette-dishka/license.svg?variant=outline&font=geist-mono&size=xs&mode=dark"><img alt="License" src="https://shieldcn.dev/github/reagento/starlette-dishka/license.svg?variant=outline&font=geist-mono&size=xs&mode=light"></picture></a>
