@@ -42,7 +42,7 @@ ast-grep = ["ast-grep-cli == 0.45.1"]
 ci = [
     "ruff == 0.16.2",
     "mypy == 2.3.0",
-    "nox == 2026.2.9",
+    "nox == 2026.8.10",
 ]
 tests = [
     "pytest == 9.1.1",
