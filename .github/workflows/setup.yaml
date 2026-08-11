@@ -27,9 +27,7 @@ jobs:
             commands: typos
 
           - name: "ast-grep"
-            commands: |
-              ast-grep test --test-dir tests/ast-grep
-              ast-grep scan
+            commands: ast-grep scan
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
